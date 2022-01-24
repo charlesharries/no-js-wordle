@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"encoding/gob"
 	"flag"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -23,9 +24,18 @@ type application struct {
 }
 
 func main() {
-	addr := flag.String("addr", "localhost:4001", "HTTP network address")
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "4001"
+	}
+	addr := fmt.Sprintf("localhost:%s", port)
+
+	secret := os.Getenv("APP_SECRET")
+	if secret == "" {
+		secret = "change_this"
+	}
+
 	devMode := flag.Bool("dev", false, "Enable debug mode")
-	secret := flag.String("secret", "change_this", "Secret key")
 	flag.Parse()
 
 	infoLog := log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
@@ -36,7 +46,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	session := sessions.New([]byte(*secret))
+	session := sessions.New([]byte(secret))
 	session.Lifetime = 12 * time.Hour
 	gob.Register(game{})
 
@@ -55,11 +65,11 @@ func main() {
 	}
 
 	srv := &http.Server{
-		Addr:    *addr,
+		Addr:    addr,
 		Handler: app.routes(),
 	}
 
-	log.Printf("Starting server at http://%s\n", *addr)
+	log.Printf("Starting server at http://%s\n", addr)
 	err = srv.ListenAndServe()
 	log.Fatal(err)
 }
