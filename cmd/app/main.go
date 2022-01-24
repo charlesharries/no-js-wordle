@@ -28,7 +28,7 @@ func main() {
 	if port == "" {
 		port = "4001"
 	}
-	addr := fmt.Sprintf("localhost:%s", port)
+	addr := fmt.Sprintf(":%s", port)
 
 	secret := os.Getenv("APP_SECRET")
 	if secret == "" {
