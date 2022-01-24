@@ -1,0 +1,9 @@
+{{define "guess"}}
+  <p>
+    {{range .Letters }}
+      <span data-status="{{.Status}}">
+        {{.Character}}
+      </span>
+    {{end}}
+  </p>
+{{end}}

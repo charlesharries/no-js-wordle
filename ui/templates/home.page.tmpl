@@ -1,0 +1,81 @@
+<html lang="en">
+  <head>
+    <title>Wordle in Go</title>
+
+    <style>
+      [data-status="miss"] {
+        color: grey;
+      }
+
+      [data-status="in-word"] {
+        color: goldenrod;
+      }
+
+      [data-status="hit"] {
+        color: green;
+      }
+
+      .row {
+        display: flex;
+      }
+
+      .row > * {
+        margin-inline: 5px;
+      }
+
+      .row:nth-child(2) {
+        margin-inline-start: 1ch;
+      }
+
+      .row:nth-child(3) {
+        margin-inline-start: 2ch;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Wordle</h1>
+    <p>It's all the wordle you know with none of the JS.</p>
+
+    {{template "restart" .}}
+
+    {{if .DevMode}}
+      <h2>[DEV MODE] Your randomly selected word is:</h2>
+      <p>{{.Game.Answer}}</p>
+    {{end}}
+
+    {{if .Game.HasWon}}
+      <p>You won!</p>
+    {{end}}
+
+    <h2>Game:</h2>
+    <ul>
+      {{if not .Game.Attempts}}
+        <li>No guesses yet!</li>
+      {{else}}
+        {{range .Game.Guesses}}
+          <li>{{template "guess" .}}</li>
+        {{end}}
+      {{end}}
+    </ul>
+
+    <section id="grid">
+      {{if not .Game.IsOver}}
+        <form action="/" method="POST">
+          <input type="hidden" name="csrf_token" value="{{.CSRFToken}}" />
+
+          {{with .Form}}
+            <input type="text" name="attempt" autofocus />
+            {{with .Errors.Get "attempt"}}
+              <p style="color: crimson">{{.}}</p>
+            {{end}}
+          {{end}}
+        </form>
+      {{end}}
+    </section>
+
+    <section>
+      {{template "keyboard" .}}
+    </section>
+  </body>
+</html>

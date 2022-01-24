@@ -1,0 +1,7 @@
+{{define "restart"}}
+  <form action="/restart" method="POST">
+    <input type="hidden" name="csrf_token" value="{{.CSRFToken}}" />
+
+    <button type="submit">Restart</button>
+  </form>
+{{end}}
