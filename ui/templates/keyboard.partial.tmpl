@@ -1,38 +1,39 @@
 {{define "keyboard"}}
   <div id="keyboard">
     <div class="row">
-      <div data-status="{{.Game.KeyboardLetterStatus "q"}}">q</div>
-      <div data-status="{{.Game.KeyboardLetterStatus "w"}}">w</div>
-      <div data-status="{{.Game.KeyboardLetterStatus "e"}}">e</div>
-      <div data-status="{{.Game.KeyboardLetterStatus "r"}}">r</div>
-      <div data-status="{{.Game.KeyboardLetterStatus "t"}}">t</div>
-      <div data-status="{{.Game.KeyboardLetterStatus "y"}}">y</div>
-      <div data-status="{{.Game.KeyboardLetterStatus "u"}}">u</div>
-      <div data-status="{{.Game.KeyboardLetterStatus "i"}}">i</div>
-      <div data-status="{{.Game.KeyboardLetterStatus "o"}}">o</div>
-      <div data-status="{{.Game.KeyboardLetterStatus "p"}}">p</div>
+      <button type="submit" formaction="/letter" name="letter" value="q" data-status="{{.Game.KeyboardLetterStatus "q"}}">q</button>
+      <button type="submit" formaction="/letter" name="letter" value="w" data-status="{{.Game.KeyboardLetterStatus "w"}}">w</button>
+      <button type="submit" formaction="/letter" name="letter" value="e" data-status="{{.Game.KeyboardLetterStatus "e"}}">e</button>
+      <button type="submit" formaction="/letter" name="letter" value="r" data-status="{{.Game.KeyboardLetterStatus "r"}}">r</button>
+      <button type="submit" formaction="/letter" name="letter" value="t" data-status="{{.Game.KeyboardLetterStatus "t"}}">t</button>
+      <button type="submit" formaction="/letter" name="letter" value="y" data-status="{{.Game.KeyboardLetterStatus "y"}}">y</button>
+      <button type="submit" formaction="/letter" name="letter" value="u" data-status="{{.Game.KeyboardLetterStatus "u"}}">u</button>
+      <button type="submit" formaction="/letter" name="letter" value="i" data-status="{{.Game.KeyboardLetterStatus "i"}}">i</button>
+      <button type="submit" formaction="/letter" name="letter" value="o" data-status="{{.Game.KeyboardLetterStatus "o"}}">o</button>
+      <button type="submit" formaction="/letter" name="letter" value="p" data-status="{{.Game.KeyboardLetterStatus "p"}}">p</button>
     </div>
 
     <div class="row">
-      <div data-status="{{.Game.KeyboardLetterStatus "a"}}">a</div>
-      <div data-status="{{.Game.KeyboardLetterStatus "s"}}">s</div>
-      <div data-status="{{.Game.KeyboardLetterStatus "d"}}">d</div>
-      <div data-status="{{.Game.KeyboardLetterStatus "f"}}">f</div>
-      <div data-status="{{.Game.KeyboardLetterStatus "g"}}">g</div>
-      <div data-status="{{.Game.KeyboardLetterStatus "h"}}">h</div>
-      <div data-status="{{.Game.KeyboardLetterStatus "j"}}">j</div>
-      <div data-status="{{.Game.KeyboardLetterStatus "k"}}">k</div>
-      <div data-status="{{.Game.KeyboardLetterStatus "l"}}">l</div>
+      <button type="submit" formaction="/letter" name="letter" value="a" data-status="{{.Game.KeyboardLetterStatus "a"}}">a</button>
+      <button type="submit" formaction="/letter" name="letter" value="s" data-status="{{.Game.KeyboardLetterStatus "s"}}">s</button>
+      <button type="submit" formaction="/letter" name="letter" value="d" data-status="{{.Game.KeyboardLetterStatus "d"}}">d</button>
+      <button type="submit" formaction="/letter" name="letter" value="f" data-status="{{.Game.KeyboardLetterStatus "f"}}">f</button>
+      <button type="submit" formaction="/letter" name="letter" value="g" data-status="{{.Game.KeyboardLetterStatus "g"}}">g</button>
+      <button type="submit" formaction="/letter" name="letter" value="h" data-status="{{.Game.KeyboardLetterStatus "h"}}">h</button>
+      <button type="submit" formaction="/letter" name="letter" value="j" data-status="{{.Game.KeyboardLetterStatus "j"}}">j</button>
+      <button type="submit" formaction="/letter" name="letter" value="k" data-status="{{.Game.KeyboardLetterStatus "k"}}">k</button>
+      <button type="submit" formaction="/letter" name="letter" value="l" data-status="{{.Game.KeyboardLetterStatus "l"}}">l</button>
     </div>
 
     <div class="row">
-      <div data-status="{{.Game.KeyboardLetterStatus "z"}}">z</div>
-      <div data-status="{{.Game.KeyboardLetterStatus "x"}}">x</div>
-      <div data-status="{{.Game.KeyboardLetterStatus "c"}}">c</div>
-      <div data-status="{{.Game.KeyboardLetterStatus "v"}}">v</div>
-      <div data-status="{{.Game.KeyboardLetterStatus "b"}}">b</div>
-      <div data-status="{{.Game.KeyboardLetterStatus "n"}}">n</div>
-      <div data-status="{{.Game.KeyboardLetterStatus "m"}}">m</div>
+      <button type="submit" formaction="/letter" name="letter" value="z" data-status="{{.Game.KeyboardLetterStatus "z"}}">z</button>
+      <button type="submit" formaction="/letter" name="letter" value="x" data-status="{{.Game.KeyboardLetterStatus "x"}}">x</button>
+      <button type="submit" formaction="/letter" name="letter" value="c" data-status="{{.Game.KeyboardLetterStatus "c"}}">c</button>
+      <button type="submit" formaction="/letter" name="letter" value="v" data-status="{{.Game.KeyboardLetterStatus "v"}}">v</button>
+      <button type="submit" formaction="/letter" name="letter" value="b" data-status="{{.Game.KeyboardLetterStatus "b"}}">b</button>
+      <button type="submit" formaction="/letter" name="letter" value="n" data-status="{{.Game.KeyboardLetterStatus "n"}}">n</button>
+      <button type="submit" formaction="/letter" name="letter" value="m" data-status="{{.Game.KeyboardLetterStatus "m"}}">m</button>
+      <button type="submit" formaction="/letter" name="letter" value="backspace">Backspace</button>
     </div>
   </div>
 {{end}}

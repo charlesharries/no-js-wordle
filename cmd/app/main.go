@@ -64,6 +64,10 @@ func main() {
 		words:         words,
 	}
 
+	if *devMode {
+		addr = fmt.Sprintf("localhost:%s", port)
+	}
+
 	srv := &http.Server{
 		Addr:    addr,
 		Handler: app.routes(),

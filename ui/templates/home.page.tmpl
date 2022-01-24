@@ -20,7 +20,7 @@
       }
 
       .row > * {
-        margin-inline: 5px;
+        margin-inline: 3px;
       }
 
       .row:nth-child(2) {
@@ -48,6 +48,10 @@
       <p>You won!</p>
     {{end}}
 
+    {{if .Game.HasLost}}
+      <p>You lost! The word was <strong>{{.Game.Answer}}</strong></p>
+    {{end}}
+
     <h2>Game:</h2>
     <ul>
       {{if not .Game.Attempts}}
@@ -64,18 +68,18 @@
         <form action="/" method="POST">
           <input type="hidden" name="csrf_token" value="{{.CSRFToken}}" />
 
+          <input type="text" name="attempt" {{if not .Attempt}}autofocus{{end}} value="{{.Attempt}}" />
+          <button type="submit" formaction="/">Submit</button>
+
           {{with .Form}}
-            <input type="text" name="attempt" autofocus />
             {{with .Errors.Get "attempt"}}
               <p style="color: crimson">{{.}}</p>
             {{end}}
           {{end}}
+
+          {{template "keyboard" .}}
         </form>
       {{end}}
-    </section>
-
-    <section>
-      {{template "keyboard" .}}
     </section>
   </body>
 </html>

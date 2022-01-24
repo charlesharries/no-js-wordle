@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"runtime/debug"
 	"time"
+	"unicode/utf8"
 
 	"github.com/justinas/nosurf"
 )
@@ -77,4 +78,13 @@ func (app *application) render(w http.ResponseWriter, r *http.Request, name stri
 	// is another time where we pass our http.ResponseWriter to a function that
 	// takes an io.Writer.
 	buf.WriteTo(w)
+}
+
+// https://stackoverflow.com/questions/57004213/how-in-golang-to-remove-the-last-letter-from-the-string
+func trimLastChar(s string) string {
+	r, size := utf8.DecodeLastRuneInString(s)
+	if r == utf8.RuneError && (size == 0 || size == 1) {
+		size = 0
+	}
+	return s[:len(s)-size]
 }

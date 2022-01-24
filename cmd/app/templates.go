@@ -9,6 +9,7 @@ import (
 )
 
 type templateData struct {
+	Attempt         string
 	CSRFToken       string
 	CurrentYear     int
 	DevMode         bool

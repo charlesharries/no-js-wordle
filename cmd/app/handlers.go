@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/charlesharries/wordle-go/pkg/forms"
@@ -13,9 +14,12 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 		app.session.Put(r, "game", g)
 	}
 
+	attempt := r.URL.Query().Get("attempt")
+
 	app.render(w, r, "home.page.tmpl", &templateData{
-		Form: forms.New(nil),
-		Game: g,
+		Attempt: attempt,
+		Form:    forms.New(nil),
+		Game:    g,
 	})
 }
 
@@ -55,4 +59,36 @@ func (app *application) restart(w http.ResponseWriter, r *http.Request) {
 	blank := game{}
 	app.session.Put(r, "game", blank)
 	http.Redirect(w, r, "/", http.StatusSeeOther)
+}
+
+func (app *application) letter(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		app.clientError(w, http.StatusBadRequest)
+		return
+	}
+
+	g, ok := app.session.Get(r, "game").(game)
+	if !ok {
+		g = game{}
+	}
+
+	form := forms.New(r.PostForm)
+	form.Required("letter")
+
+	if !form.Valid() {
+		app.render(w, r, "home.page.tmpm", &templateData{
+			Form: form,
+			Game: g,
+		})
+	}
+
+	var to string
+	if form.Get("letter") == "backspace" {
+		to = fmt.Sprintf("/?attempt=%s", trimLastChar(form.Get("attempt")))
+	} else {
+		to = fmt.Sprintf("/?attempt=%s%s", form.Get("attempt"), form.Get("letter"))
+	}
+
+	http.Redirect(w, r, to, http.StatusSeeOther)
 }

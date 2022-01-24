@@ -15,6 +15,7 @@ func (app *application) routes() http.Handler {
 
 	mux.Get("/", dynamicMiddleware.ThenFunc(http.HandlerFunc(app.home)))
 	mux.Post("/", dynamicMiddleware.ThenFunc(http.HandlerFunc(app.guess)))
+	mux.Post("/letter", dynamicMiddleware.ThenFunc(http.HandlerFunc(app.letter)))
 	mux.Post("/restart", dynamicMiddleware.ThenFunc(http.HandlerFunc(app.restart)))
 
 	return standardMiddleware.Then(mux)
