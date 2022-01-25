@@ -1,0 +1,66 @@
+{{define "grid"}}
+  <section class="grid">
+    <form action="/" method="POST">
+      {{with .Form}}
+        {{with .Errors.Get "attempt"}}
+          <p style="color: crimson">{{.}}</p>
+        {{end}}
+      {{end}}
+
+      <input type="hidden" name="csrf_token" value="{{.CSRFToken}}" />
+
+      <ul>
+        {{range .Game.Guesses}}
+          <li class="grid-row">
+            {{template "gridRow" .}}
+          </li>
+        {{end}}
+        <!-- Only show this if not .Game.IsOver -->
+        {{if .Game.IsOver}}
+          <li class="grid-row">{{template "emptyGridRow" .}}</li>
+        {{else}}
+          <li class="grid-row">
+            {{template "input" .}}
+          </li>
+        {{end}}
+
+        {{range len .Game.Attempts | sub 5 | times}}
+          <li class="grid-row">
+            {{template "emptyGridRow" .}}
+          </li>
+        {{end}}
+      </ul>
+
+      {{template "keyboard" .}}
+    </form>
+  </section>
+{{end}}
+
+{{define "input"}}
+  <div class="input">
+    <ul class="attempt">
+      {{range times 5}}
+        <li class="letter" data-empty></li>
+      {{end}}
+    </ul>
+
+    <input type="text" name="attempt" {{if not .Attempt}}autofocus{{end}} value="{{.Attempt}}" />
+    <button type="submit" formaction="/">&check;</button>
+  </div>
+{{end}}
+
+{{define "gridRow"}}
+  <ul class="attempt">
+    {{range .Letters}}
+      <li data-status="{{.Status}}" class="letter">{{.Character}}</li>
+    {{end}}
+  </ul>
+{{end}}
+
+{{define "emptyGridRow"}}
+  <ul class="attempt" data-empty>
+    {{range times 5}}
+      <li class="letter"></li>
+    {{end}}
+  </ul>
+{{end}}

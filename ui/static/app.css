@@ -1,46 +1,91 @@
-body {
-  font-family: sans-serif;
-  height: 100%;
-  width: 100%;
-  background-color: white;
-
+:root {
+  --background: white;
+  --border: #dadada;
   --unattempted: #bababa;
   --miss: #666;
   --in-word: #DAA520;
   --hit: #008000;
+  --info: #035faa;
+  --radius: 4px;
+  --text: black;
+  --monospace: ui-monospace, "Cascadia Mono", "Segoe UI Mono", "Liberation Mono", Menlo, Monaco, Consolas, monospace
+}
+
+body {
+  font-family: sans-serif;
+  height: 100%;
+  width: 100%;
+  background-color: var(--background);
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  padding: 10px;
+  color: var(--text);
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
 }
 
 @media (prefers-color-scheme: dark) {
-  body {
-    background-color: #222;
-    color: white;
+  :root {
+    --border: #333;
+    --text: white;
+    --background: #222;
   }
 }
 
-[data-status="miss"] {
-  color: var(--miss);
+header {
+  text-align: center;
 }
 
-[data-status="in-word"] {
+.mt { margin-block-start: 10px; }
+.ml { margin-inline-start: 10px; }
+.center { text-align: center; }
+
+.restart {
+  font-size: 16px;
+  height: 40px;
+  padding-inline: 15px;
+  background-color: var(--info);
+  color: white;
+  border: 0;
+  border-radius: var(--radius);
+  display: inline-flex;
+  align-items: center;
+}
+
+.restart svg {
+  height: 18px;
+  width: 18px;
+}
+
+.devMode {
+  border: 1px solid var(--in-word);
   color: var(--in-word);
+  font-weight: 900;
+  padding: 10px;
 }
 
-[data-status="hit"] {
-  color: var(--hit);
-}
-
-#keyboard button[data-status="miss"] {
+#keyboard button[data-status="miss"],
+.letter[data-status="miss"] {
   background-color: var(--miss);
+  border-color: var(--miss);
   color: white;
 }
 
-#keyboard button[data-status="in-word"] {
+#keyboard button[data-status="in-word"],
+.letter[data-status="in-word"] {
   background-color: var(--in-word);
+  border-color: var(--in-word);
   color: white;
 }
 
-#keyboard button[data-status="hit"] {
+#keyboard button[data-status="hit"],
+.letter[data-status="hit"] {
   background-color: var(--hit);
+  border-color: var(--hit);
   color: white;
 }
 
@@ -71,4 +116,86 @@ body {
   text-transform: uppercase;
   line-height: 2;
   background-color: var(--unattempted);
+  display: flex;
+  width: 25px;
+  place-content: center;
+}
+
+#keyboard button[value="backspace"] {
+  width: auto;
+}
+
+.grid {
+  font-family: monospace;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.grid-row {
+  padding-left: 0;
+  list-style: none;
+}
+
+.grid-row + .grid-row {
+  margin-block-start: 5px;
+}
+
+.attempt {
+  padding-left: 0;
+  display: flex;
+  list-style: none;
+}
+
+.letter {
+  text-align: center;
+  border: 1px solid var(--border);
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.letter + .letter {
+  margin-inline-start: 5px;
+}
+
+.input {
+  --width: calc((40px * 5) + (5px * 4));
+  position: relative;
+}
+
+.input input {
+  padding-inline-start: 14px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 40px;
+  width: calc(var(--width) + 33px);
+  border: 0;
+  font-family: monospace;
+  font-size: 20px;
+  letter-spacing: 33px;
+  margin-inline-end: -14px;
+  background-color: transparent;
+  color: transparent;
+  text-shadow: 0 0 0 var(--text);
+  text-transform: uppercase;
+}
+
+.input input:focus {
+  outline: none;
+}
+
+.input button[type="submit"] {
+  position: absolute;
+  color: currentColor;
+  left: calc(var(--width) + 5px);
+  top: 0;
+  height: 40px;
+  width: 40px;
+  border: 1px solid var(--border);
+  background-color: transparent;
 }

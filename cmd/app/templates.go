@@ -21,10 +21,18 @@ type templateData struct {
 	Game            game
 }
 
+func times(times int) []interface{} {
+	return make([]interface{}, times)
+}
+
+func sub(first, second int) int {
+	return first - second
+}
+
 // Initialise a template.FuncMap object and store it in a global variable. This is
 // essentially a string-keyed map which acts as a lookup between the names of our
 // custom template functions and the functions themselves.
-var functions = template.FuncMap{}
+var functions = template.FuncMap{"sub": sub, "times": times}
 
 func newTemplateCache(dir string) (map[string]*template.Template, error) {
 	// Initialise a new map to act as the cache

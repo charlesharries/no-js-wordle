@@ -7,52 +7,32 @@
   </head>
 
   <body>
-    <h1>Wordle</h1>
-    <p>It's all the wordle you know with none of the JS.</p>
+    <header>
+      <h1>Wordle w/ no JS</h1>
+      <p class="mt">It's all the wordle you know with none of the JS.</p>
 
-    {{template "restart" .}}
+      <div class="mt">
+        {{template "restart" .}}
+      </div>
+    </header>
 
     {{if .DevMode}}
-      <h2>[DEV MODE] Your randomly selected word is:</h2>
-      <p>{{.Game.Answer}}</p>
+      <aside class="devMode mt">
+        <h2>[DEV MODE] Your randomly selected word is:</h2>
+        <p>{{.Game.Answer}}</p>
+      </aside>
     {{end}}
 
     {{if .Game.HasWon}}
-      <p>You won!</p>
+      <p class="mt center">You won!</p>
     {{end}}
 
     {{if .Game.HasLost}}
-      <p>You lost! The word was <strong>{{.Game.Answer}}</strong></p>
+      <p class="mt center">You lost! The word was <strong>{{.Game.Answer}}</strong></p>
     {{end}}
 
-    <h2>Game:</h2>
-    <ul>
-      {{if not .Game.Attempts}}
-        <li>No guesses yet!</li>
-      {{else}}
-        {{range .Game.Guesses}}
-          <li>{{template "guess" .}}</li>
-        {{end}}
-      {{end}}
-    </ul>
-
-    <section id="grid">
-      {{if not .Game.IsOver}}
-        <form action="/" method="POST">
-          <input type="hidden" name="csrf_token" value="{{.CSRFToken}}" />
-
-          <input type="text" name="attempt" {{if not .Attempt}}autofocus{{end}} value="{{.Attempt}}" />
-          <button type="submit" formaction="/">Submit</button>
-
-          {{with .Form}}
-            {{with .Errors.Get "attempt"}}
-              <p style="color: crimson">{{.}}</p>
-            {{end}}
-          {{end}}
-
-          {{template "keyboard" .}}
-        </form>
-      {{end}}
-    </section>
+    <div class="mt">
+      {{template "grid" .}}
+    </div>
   </body>
 </html>

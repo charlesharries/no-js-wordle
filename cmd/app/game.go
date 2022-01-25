@@ -30,6 +30,17 @@ const (
 	Unattempted status = "unattempted"
 )
 
+func (s *status) Value() int {
+	values := map[status]int{
+		Unattempted: 0,
+		Miss:        1,
+		InWord:      2,
+		Hit:         3,
+	}
+
+	return values[*s]
+}
+
 func (g *game) Guess(attempt string) {
 	g.Attempts = append(g.Attempts, attempt)
 }
@@ -60,15 +71,17 @@ func (g *game) Guesses() []guess {
 }
 
 func (g *game) KeyboardLetterStatus(l string) status {
+	status := Unattempted
+
 	for _, guess := range g.Guesses() {
 		for _, ltr := range guess.Letters {
-			if ltr.Character == l {
-				return ltr.Status
+			if ltr.Character == l && ltr.Status.Value() > status.Value() {
+				status = ltr.Status
 			}
 		}
 	}
 
-	return Unattempted
+	return status
 }
 
 func (g *game) LetterStatus(l string, pos int) status {
