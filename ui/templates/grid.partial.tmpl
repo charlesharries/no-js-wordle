@@ -17,7 +17,9 @@
         {{end}}
         <!-- Only show this if not .Game.IsOver -->
         {{if .Game.IsOver}}
-          <li class="grid-row">{{template "emptyGridRow" .}}</li>
+          {{if not .Game.HasLost}}
+            <li class="grid-row">{{template "emptyGridRow" .}}</li>
+          {{end}}
         {{else}}
           <li class="grid-row">
             {{template "input" .}}

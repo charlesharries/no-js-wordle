@@ -26,7 +26,11 @@ func times(times int) []interface{} {
 }
 
 func sub(first, second int) int {
-	return first - second
+	result := first - second
+	if result < 0 {
+		return 0
+	}
+	return result
 }
 
 // Initialise a template.FuncMap object and store it in a global variable. This is
