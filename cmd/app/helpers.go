@@ -80,6 +80,18 @@ func (app *application) render(w http.ResponseWriter, r *http.Request, name stri
 	buf.WriteTo(w)
 }
 
+// https://stackoverflow.com/questions/41602230/return-first-n-chars-of-a-string
+func firstN(s string, n int) string {
+	i := 0
+	for j := range s {
+		if i == n {
+			return s[:j]
+		}
+		i++
+	}
+	return s
+}
+
 // https://stackoverflow.com/questions/57004213/how-in-golang-to-remove-the-last-letter-from-the-string
 func trimLastChar(s string) string {
 	r, size := utf8.DecodeLastRuneInString(s)

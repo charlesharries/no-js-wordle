@@ -44,7 +44,7 @@
       {{end}}
     </ul>
 
-    <input type="text" name="attempt" {{if not .Attempt}}autofocus{{end}} value="{{.Attempt}}" />
+    <input maxlength="5" type="text" name="attempt" {{if not .Attempt}}autofocus{{end}} value="{{.Attempt}}" />
     <button type="submit" formaction="/">&check;</button>
   </div>
 {{end}}

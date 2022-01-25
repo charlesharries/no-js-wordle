@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/charlesharries/wordle-go/pkg/forms"
 )
@@ -36,6 +37,7 @@ func (app *application) guess(w http.ResponseWriter, r *http.Request) {
 	}
 
 	form := forms.New(r.PostForm)
+	fmt.Println(form.Get("attempt"))
 	form.Required("attempt")
 	form.MaxLength("attempt", 5)
 	form.MinLength("attempt", 5)
@@ -49,7 +51,7 @@ func (app *application) guess(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	g.Guess(form.Get("attempt"))
+	g.Guess(strings.ToLower(form.Get("attempt")))
 	app.session.Put(r, "game", g)
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)
@@ -83,12 +85,12 @@ func (app *application) letter(w http.ResponseWriter, r *http.Request) {
 		})
 	}
 
-	var to string
+	var attempt string
 	if form.Get("letter") == "backspace" {
-		to = fmt.Sprintf("/?attempt=%s", trimLastChar(form.Get("attempt")))
+		attempt = trimLastChar(form.Get("attempt"))
 	} else {
-		to = fmt.Sprintf("/?attempt=%s%s", form.Get("attempt"), form.Get("letter"))
+		attempt = fmt.Sprintf("%s%s", form.Get("attempt"), form.Get("letter"))
 	}
 
-	http.Redirect(w, r, to, http.StatusSeeOther)
+	http.Redirect(w, r, fmt.Sprintf("/?attempt=%s", firstN(attempt, 5)), http.StatusSeeOther)
 }

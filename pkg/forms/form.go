@@ -64,7 +64,7 @@ func (f *Form) MinLength(field string, d int) {
 func (f *Form) InWordList(field string, list []string) {
 	value := f.Get(field)
 	for _, item := range list {
-		if value == item {
+		if strings.ToLower(value) == item {
 			return
 		}
 	}
