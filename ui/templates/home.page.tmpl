@@ -1,36 +1,9 @@
 <html lang="en">
   <head>
     <title>Wordle in Go</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <style>
-      [data-status="miss"] {
-        color: grey;
-      }
-
-      [data-status="in-word"] {
-        color: goldenrod;
-      }
-
-      [data-status="hit"] {
-        color: green;
-      }
-
-      .row {
-        display: flex;
-      }
-
-      .row > * {
-        margin-inline: 3px;
-      }
-
-      .row:nth-child(2) {
-        margin-inline-start: 1ch;
-      }
-
-      .row:nth-child(3) {
-        margin-inline-start: 2ch;
-      }
-    </style>
+    <link href="/static/app.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>

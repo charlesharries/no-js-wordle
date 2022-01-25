@@ -18,5 +18,9 @@ func (app *application) routes() http.Handler {
 	mux.Post("/letter", dynamicMiddleware.ThenFunc(http.HandlerFunc(app.letter)))
 	mux.Post("/restart", dynamicMiddleware.ThenFunc(http.HandlerFunc(app.restart)))
 
+	// Serve static files from the /ui/static directory.
+	fileServer := http.FileServer(http.Dir("./ui/static"))
+	mux.Get("/static/", http.StripPrefix("/static", fileServer))
+
 	return standardMiddleware.Then(mux)
 }

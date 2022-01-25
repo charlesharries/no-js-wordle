@@ -1,0 +1,74 @@
+body {
+  font-family: sans-serif;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+
+  --unattempted: #bababa;
+  --miss: #666;
+  --in-word: #DAA520;
+  --hit: #008000;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #222;
+    color: white;
+  }
+}
+
+[data-status="miss"] {
+  color: var(--miss);
+}
+
+[data-status="in-word"] {
+  color: var(--in-word);
+}
+
+[data-status="hit"] {
+  color: var(--hit);
+}
+
+#keyboard button[data-status="miss"] {
+  background-color: var(--miss);
+  color: white;
+}
+
+#keyboard button[data-status="in-word"] {
+  background-color: var(--in-word);
+  color: white;
+}
+
+#keyboard button[data-status="hit"] {
+  background-color: var(--hit);
+  color: white;
+}
+
+.row {
+  display: flex;
+}
+
+.row > * {
+  margin-inline: 3px;
+  margin-block: 3px;
+}
+
+.row:nth-child(2) {
+  margin-inline-start: 1ch;
+}
+
+.row:nth-child(3) {
+  margin-inline-start: 2ch;
+}
+
+#keyboard {
+  margin-block-start: 15px;
+}
+
+#keyboard button {
+  font-size: 18px;
+  border: none;
+  text-transform: uppercase;
+  line-height: 2;
+  background-color: var(--unattempted);
+}
