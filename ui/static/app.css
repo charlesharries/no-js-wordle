@@ -40,6 +40,10 @@ header {
   text-align: center;
 }
 
+button {
+  appearance: none;
+}
+
 .mt { margin-block-start: 10px; }
 .ml { margin-inline-start: 10px; }
 .center { text-align: center; }
