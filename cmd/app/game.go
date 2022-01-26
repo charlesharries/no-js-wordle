@@ -104,9 +104,10 @@ func (g *game) IsOver() bool {
 	return g.HasWon() || g.HasLost()
 }
 
+// Get a random word from the most common 1000. We want to be fair.
 func (app *application) randomWord() string {
 	rand.Seed(time.Now().UnixNano())
-	randIdx := rand.Intn(len(app.words))
+	randIdx := rand.Intn(1000)
 
 	return app.words[randIdx]
 }
