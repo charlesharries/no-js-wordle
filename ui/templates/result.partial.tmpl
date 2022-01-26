@@ -1,0 +1,13 @@
+{{define "result"}}
+  <div class="result">
+    <p>Wordle w/ no JS: {{.Game.Answer}}</p>
+    <br />
+    <div class="result-grid">
+      {{range .Game.Guesses}}
+        <div>
+          {{range .Letters}}{{if eq .Status "hit"}}🟩{{else if eq .Status "in-word"}}🟨{{else if eq .Status "miss"}}⬜{{end}}{{end}}
+        </div>
+      {{end}}
+    </div>
+  </div>
+{{end}}

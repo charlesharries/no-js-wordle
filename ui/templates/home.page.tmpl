@@ -25,6 +25,7 @@
 
     {{if .Game.HasWon}}
       <p class="mt center">You won!</p>
+      {{template "result" .}}
     {{end}}
 
     {{if .Game.HasLost}}

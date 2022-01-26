@@ -74,6 +74,12 @@ button {
   padding: 10px;
 }
 
+.result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #keyboard button[data-status="miss"],
 .letter[data-status="miss"] {
   background-color: var(--miss);
