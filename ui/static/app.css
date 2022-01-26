@@ -8,11 +8,12 @@
   --info: #035faa;
   --radius: 4px;
   --text: black;
+  --sans: sans-serif;
   --monospace: ui-monospace, "Cascadia Mono", "Segoe UI Mono", "Liberation Mono", Menlo, Monaco, Consolas, monospace
 }
 
 body {
-  font-family: sans-serif;
+  font-family: var(--sans);
   height: 100%;
   width: 100%;
   background-color: var(--background);
@@ -44,6 +45,11 @@ button {
   appearance: none;
   -webkit-appearance: none;
   display: block;
+  font-family: var(--sans);
+}
+
+a {
+  color: currentColor;
 }
 
 .mt { margin-block-start: 10px; }
